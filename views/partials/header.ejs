@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NestVibes – <%= typeof title !== 'undefined' ? title : 'Property Listings' %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ─── Navbar ─────────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/listings" class="navbar-brand">
+    <span class="brand-icon">🏠</span>
+    <span class="brand-text">NestVibes</span>
+  </a>
+  <div class="navbar-links">
+    <a href="/listings" class="nav-link <%= currentPath === '/listings' ? 'active' : '' %>">Browse</a>
+    <a href="/listings/new" class="btn btn-primary btn-sm">+ List Property</a>
+    <% if (currentUser) { %>
+      <span class="nav-link user-info">👤 <%= currentUser.username %></span>
+      <form action="/logout" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-secondary btn-sm">Logout</button>
+      </form>
+    <% } else { %>
+      <a href="/login" class="nav-link <%= currentPath === '/login' ? 'active' : '' %>">Login</a>
+      <a href="/register" class="btn btn-primary btn-sm">Register</a>
+    <% } %>
+  </div>
+</nav>
+
+<!-- ─── Flash Messages ──────────────────────────────────────────────── -->
+<div class="flash-container">
+  <% if (success && success.length) { %>
+    <div class="flash flash-success">
+      <span>✓</span> <%= success[0] %>
+      <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+    </div>
+  <% } %>
+  <% if (error && error.length) { %>
+    <div class="flash flash-error">
+      <span>⚠</span> <%= error[0] %>
+      <button class="flash-close" onclick="this.parentElement.remove()">×</button>
+    </div>
+  <% } %>
+</div>
+
+<main class="main-content">

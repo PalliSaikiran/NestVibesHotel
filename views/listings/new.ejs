@@ -1,0 +1,61 @@
+<%- include('../partials/header', { title: 'New Listing' }) %>
+
+<section class="form-page">
+  <div class="form-card">
+    <h1 class="form-title">📋 List a New Property</h1>
+    <p class="form-subtitle">Fill in the details below to publish your listing.</p>
+
+    <form action="/listings" method="POST" novalidate>
+
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="title">Property Title *</label>
+          <input type="text" id="title" name="listing[title]" class="input" placeholder="e.g. Cozy Beachfront Studio" required />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="description">Description *</label>
+          <textarea id="description" name="listing[description]" class="input textarea" rows="4" placeholder="Describe the property, amenities, surroundings…" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price per Night (₹) *</label>
+          <input type="number" id="price" name="listing[price]" class="input" min="0" placeholder="e.g. 2500" required />
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category *</label>
+          <select id="category" name="listing[category]" class="input select-input" required>
+            <option value="">Select category…</option>
+            <% categories.forEach(cat => { %>
+              <option value="<%= cat %>"><%= cat %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="location">City / Town *</label>
+          <input type="text" id="location" name="listing[location]" class="input" placeholder="e.g. Goa" required />
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country *</label>
+          <input type="text" id="country" name="listing[country]" class="input" placeholder="e.g. India" required />
+        </div>
+
+        <div class="form-group full-width">
+          <label for="image">Image URL <span class="optional">(optional)</span></label>
+          <input type="url" id="image" name="listing[image]" class="input" placeholder="https://example.com/photo.jpg" />
+          <small class="hint">Leave blank to use a default image.</small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <a href="/listings" class="btn btn-ghost">Cancel</a>
+        <button type="submit" class="btn btn-primary">Publish Listing</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
