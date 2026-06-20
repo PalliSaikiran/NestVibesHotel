@@ -150,8 +150,8 @@ const sampleListings = [
 ];
 
 async function seed() {
-  // Use the capital N database name
-  await mongoose.connect('mongodb://127.0.0.1:27017/NestVibes');
+  // Use the MONGO_URI from environment variable
+  await mongoose.connect(process.env.MONGO_URI);
   console.log('Connected to MongoDB');
 
   // Clear existing data
